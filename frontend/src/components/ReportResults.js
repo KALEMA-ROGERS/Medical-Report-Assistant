@@ -9,7 +9,7 @@ export default function ReportResults({ report }) {
     setIsTranslating(true);
     try {
       const result = await translateText({
-        text: `Outcome: ${report.outcome}`,
+        text: report.outcome,
         target_lang: language
       });
       setTranslatedOutcome(result);

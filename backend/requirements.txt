@@ -7,3 +7,5 @@ googletrans
 python-multipart
 PyPDF2
 python-docx (or docx)
+python-dotenv
+

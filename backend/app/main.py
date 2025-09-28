@@ -16,6 +16,7 @@ load_dotenv()
 
 # Create database tables
 Base.metadata.create_all(bind=engine)
+print("[INFO] Database tables created (or already exist). If you see 'no such table' errors, delete reports.db and restart.")
 
 app = FastAPI(title="Feyti Medical Report Assistant", version="1.0.0")
 
@@ -150,7 +151,7 @@ async def process_report(report_data: dict, db: Session = Depends(get_db)):
         db.commit()
         db.refresh(db_report)
         
-        return {
+        response = {
             "id": db_report.id,
             "drug": drug,
             "adverse_events": adverse_events,
@@ -158,8 +159,13 @@ async def process_report(report_data: dict, db: Session = Depends(get_db)):
             "outcome": outcome,
             "original_report": report_text
         }
+        print("[DEBUG] Returning processed report:", response)
+        return response
         
     except Exception as e:
+        import traceback
+        print("[ERROR] Exception in /process-report:")
+        traceback.print_exc()
         raise HTTPException(status_code=500, detail=f"Error processing report: {str(e)}")
 
 @app.get("/reports")

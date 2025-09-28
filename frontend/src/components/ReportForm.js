@@ -18,6 +18,7 @@ export default function ReportForm({ onReportProcessed }) {
 
     try {
       const result = await processReport({ report: reportText });
+      console.log('[DEBUG] Backend /process-report response:', result);
       onReportProcessed(result);
       setReportText(''); // Clear form after successful processing
     } catch (err) {
