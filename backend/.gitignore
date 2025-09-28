@@ -1,0 +1,17 @@
+# Ignore .env files and other sensitive data
+.env
+reports.db
+__pycache__
+venv/
+venv
+instance/
+*.pyc   
+.DS_Store
+.idea/
+*.sqlite3
+*.log
+*.pot
+*.mo
+*.egg-info/
+
+
