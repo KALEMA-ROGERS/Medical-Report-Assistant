@@ -1,3 +1,16 @@
+## User Interface
+
+### Analytics Overview
+![Analytics Overview](../assets/Image-analytics%202.PNG)
+
+### Dashboard
+![Dashboard](../assets/Image-dashbord.PNG)
+
+### Report History
+![Report History](../assets/Image-report%20history.PNG)
+
+### Analytics (Alternative View)
+![Analytics Alternative](../assets/Image-analytics.PNG)
 # Feyti Medical Report Assistant - Backend
 
 ## Overview
@@ -175,10 +188,6 @@ This is the backend API for the Feyti Medical Report Assistant, a powerful tool 
   - Ensure the correct Python environment is activated
   - Check `.env` for required API keys
 
-  ## License
-  MIT License
-
-  ---
 
   For frontend setup, see `../frontend/README.md`.
 # Using gunicorn

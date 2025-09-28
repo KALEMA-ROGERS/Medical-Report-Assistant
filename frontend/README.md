@@ -1,3 +1,16 @@
+## User Interface
+
+### Analytics Overview
+![Analytics Overview](../assets/Image-analytics%202.PNG)
+
+### Dashboard
+![Dashboard](../assets/Image-dashbord.PNG)
+
+### Report History
+![Report History](../assets/Image-report%20history.PNG)
+
+### Analytics (Alternative View)
+![Analytics Alternative](../assets/Image-analytics.PNG)
 # Feyti Medical Report Assistant – Frontend
 
 A modern, responsive web application for processing, translating, and analyzing medical reports using AI. This is the frontend for the Feyti Medical Report Assistant project.
@@ -73,10 +86,5 @@ frontend/
 2. Create a new branch (`git checkout -b feature/your-feature`)
 3. Make your changes and commit (`git commit -m 'Add feature'`)
 4. Push to your fork and open a Pull Request
-
-## License
-This project is licensed under the MIT License.
-
----
 
 For backend setup and API documentation, see `../backend/README.md`.
