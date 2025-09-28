@@ -1,9 +1,7 @@
-from sqlalchemy import Column, Integer, String, DateTime, Text
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.sql import func
-import datetime
 
-Base = declarative_base()
+from sqlalchemy import Column, Integer, String, DateTime, Text
+import datetime
+from .database import Base
 
 class Report(Base):
     __tablename__ = "reports"

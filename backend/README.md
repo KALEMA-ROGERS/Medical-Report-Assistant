@@ -48,7 +48,6 @@ This is the backend API for the Feyti Medical Report Assistant, a powerful tool 
 1. **Clone the repository**
    ```bash
    git clone <repository-url>
-   cd feyti-medical-report-assistant/backend
    ```
 
 2. **Create virtual environment**
@@ -56,8 +55,6 @@ This is the backend API for the Feyti Medical Report Assistant, a powerful tool 
    python -m venv venv
    source venv/bin/activate  # On Windows: venv\Scripts\activate
    ```
-
-
 3. **Install dependencies**
   The `requirements.txt` includes the following (add if missing):
   ```
@@ -65,37 +62,131 @@ This is the backend API for the Feyti Medical Report Assistant, a powerful tool 
   uvicorn
   sqlalchemy
   pydantic
-  spacy
-  googletrans
-  python-multipart
-  PyPDF2
   python-docx
   ```
   Then install:
-  ```bash
-  pip install -r requirements.txt
-  ```
-
-
-## Running the Application
 
 
 ### Development
 ```bash
-# Start the development server (from the backend directory)
-python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 ```
 
-### Production
-```bash
+  # Feyti Medical Report Assistant – Backend
+
+  The backend API for the Feyti Medical Report Assistant, providing AI-powered medical report processing, translation, and analytics.
+
+  ## Features
+  - FastAPI-based RESTful API
+  - Process and extract structured data from medical reports
+  - Store reports in SQLite database (`reports.db`)
+  - Multilingual translation (French & Swahili)
+  - NLP-based extraction using spaCy
+  - CORS enabled for frontend integration
+
+  ## Project Architecture
+
+  ```
+  backend/
+  ├── app/
+  │   ├── __init__.py
+  │   ├── main.py         # FastAPI app and routes
+  │   ├── models.py       # SQLAlchemy models
+  │   ├── database.py     # DB connection and Base
+  │   ├── utils.py        # Text processing utilities
+  │   └── translation.py  # Translation logic
+  ├── requirements.txt    # Python dependencies
+  ├── test_api.py         # API tests
+  ├── reports.db          # SQLite database
+  └── README.md           # This file
+  ```
+
+  ## Prerequisites
+  - Python 3.8 or higher
+  - pip
+
+  ## Setup & Installation
+
+  1. **Clone the repository**
+    ```bash
+    git clone <repository-url>
+    cd feyti-medical-report-assistant/backend
+    ```
+
+  2. **Create and activate a virtual environment**
+    ```bash
+    python -m venv venv
+    # On Windows:
+    venv\Scripts\activate
+    # On macOS/Linux:
+    source venv/bin/activate
+    ```
+
+  3. **Install dependencies**
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+  4. **Download spaCy model**
+    ```bash
+    python -m spacy download en_core_web_sm
+    ```
+
+  5. **Configure environment variables**
+    - Create a `.env` file for API keys and settings (see `.env.example` if available)
+
+  ## Running the Application
+
+  ### Development
+  ```bash
+  python -m uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
+  ```
+
+  ### Production
+  ```bash
+  gunicorn app.main:app -w 4 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000
+  ```
+
+  The API will be available at: http://localhost:8000
+
+  ## API Endpoints
+
+  - `GET /` – API status/info
+  - `POST /process-report` – Process a medical report
+  - `GET /reports` – List all processed reports
+  - `POST /translate` – Translate outcome text
+
+  Interactive API docs:
+  - Swagger UI: http://localhost:8000/docs
+  - ReDoc: http://localhost:8000/redoc
+
+  ## Database
+  - Uses SQLite (`reports.db`) by default
+  - Tables are auto-created on startup
+  - To reset, delete `reports.db` and restart the backend
+
+  ## Testing
+  Run tests with:
+  ```bash
+  pytest test_api.py
+  ```
+
+  ## Troubleshooting
+  - If you see `no such table: reports`, delete `reports.db` and restart the backend
+  - Ensure the correct Python environment is activated
+  - Check `.env` for required API keys
+
+  ## License
+  MIT License
+
+  ---
+
+  For frontend setup, see `../frontend/README.md`.
 # Using gunicorn
 gunicorn app.main:app -w 4 -k uvicorn.workers.UvicornWorker --bind 0.0.0.0:8000
 ```
 
 The API will be available at:
 - **API**: http://localhost:8000
-- **Interactive Docs**: http://localhost:8000/docs
-- **ReDoc**: http://localhost:8000/redoc
 
 
 ## Project Structure
@@ -132,16 +223,7 @@ The system can extract and identify:
 Currently supports translation between:
 - English (en)
 - French (fr)
-- Spanish (es)
-- German (de)
-- Italian (it)
-- Portuguese (pt)
-- Dutch (nl)
-- Russian (ru)
-- Chinese (zh)
-- Japanese (ja)
-- Korean (ko)
-- Arabic (ar)
+- Swahili
 
 ## Configuration
 
