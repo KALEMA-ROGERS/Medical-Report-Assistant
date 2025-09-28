@@ -24,8 +24,9 @@ const ResultsDisplay = ({ result, onTranslate, loading }) => {
 
   if (!result) {
     return (
-      <div className="bg-white rounded-xl shadow p-8 text-center text-gray-500">
-        <p>📝 No results to display. Process a report first.</p>
+      <div className="bg-gradient-to-br from-blue-50 to-purple-100 rounded-2xl shadow-lg p-6 sm:p-10 text-center text-gray-500 border border-blue-100">
+        <p className="text-2xl mb-2">📝</p>
+        <p className="font-medium">No results to display. Process a report first.</p>
       </div>
     );
   }
@@ -63,56 +64,56 @@ const ResultsDisplay = ({ result, onTranslate, loading }) => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow p-8">
-      <div className="mb-8">
-        <h3 className="text-xl font-bold mb-4 text-blue-700 flex items-center gap-2">📊 Processing Summary</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div className="bg-blue-50 rounded-lg p-4 text-center">
-            <span className="block text-sm font-semibold text-blue-800 mb-1">Drug Identified</span>
-            <span className="block text-lg font-bold text-blue-900">{result.drug || 'Not identified'}</span>
+    <div className="bg-gradient-to-br from-blue-50 to-purple-100 rounded-2xl shadow-lg p-4 sm:p-8 max-w-full border border-blue-100">
+      <div className="mb-6 sm:mb-8">
+        <h3 className="text-xl sm:text-2xl font-extrabold mb-4 text-blue-800 flex items-center gap-2 text-center tracking-tight drop-shadow">📊 Processing Summary</h3>
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="bg-white/80 rounded-xl p-4 text-center shadow hover:shadow-lg transition-all border border-blue-100">
+            <span className="block text-xs sm:text-sm font-semibold text-blue-700 mb-1">Drug Identified</span>
+            <span className="block text-lg font-bold text-blue-900 break-words tracking-wide">{result.drug || 'Not identified'}</span>
           </div>
-          <div className="bg-red-50 rounded-lg p-4 text-center">
-            <span className="block text-sm font-semibold text-red-800 mb-1">Adverse Events</span>
+          <div className="bg-white/80 rounded-xl p-4 text-center shadow hover:shadow-lg transition-all border border-red-100">
+            <span className="block text-xs sm:text-sm font-semibold text-red-700 mb-1">Adverse Events</span>
             <span className="block text-lg font-bold text-red-900">{result.adverse_events?.length || 0}</span>
           </div>
-          <div className="bg-yellow-50 rounded-lg p-4 text-center">
-            <span className="block text-sm font-semibold text-yellow-800 mb-1">Severity</span>
-            <span className={`block text-lg font-bold rounded px-2 py-1 ${getSeverityColor(result.severity)}`}>{result.severity || 'Unknown'}</span>
+          <div className="bg-white/80 rounded-xl p-4 text-center shadow hover:shadow-lg transition-all border border-yellow-100">
+            <span className="block text-xs sm:text-sm font-semibold text-yellow-700 mb-1">Severity</span>
+            <span className={`block text-lg font-bold rounded px-2 py-1 ${getSeverityColor(result.severity)} shadow-sm`}>{result.severity || 'Unknown'}</span>
           </div>
-          <div className="bg-green-50 rounded-lg p-4 text-center">
-            <span className="block text-sm font-semibold text-green-800 mb-1">Outcome</span>
-            <span className={`block text-lg font-bold rounded px-2 py-1 ${getOutcomeColor(result.outcome)}`}>{result.outcome || 'Unknown'}</span>
+          <div className="bg-white/80 rounded-xl p-4 text-center shadow hover:shadow-lg transition-all border border-green-100">
+            <span className="block text-xs sm:text-sm font-semibold text-green-700 mb-1">Outcome</span>
+            <span className={`block text-lg font-bold rounded px-2 py-1 ${getOutcomeColor(result.outcome)} shadow-sm`}>{result.outcome || 'Unknown'}</span>
           </div>
         </div>
       </div>
       {/* Drug Information */}
-      <div className="mb-8 border-b pb-6">
-        <div className="flex items-center justify-between mb-2">
+      <div className="mb-6 sm:mb-8 border-b pb-4 sm:pb-6">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-2 gap-2">
           <h4 className="font-semibold text-blue-700 flex items-center gap-2">💊 Drug Information</h4>
           <div className="flex gap-2">
             <button
               onClick={() => handleTranslation(result.drug, 'drug', 'fr')}
               disabled={translatingField === 'drug' || !result.drug}
-              className="px-3 py-1 rounded bg-blue-100 text-blue-800 font-semibold hover:bg-blue-200 disabled:opacity-50"
+              className="px-3 py-1 rounded bg-blue-100 text-blue-800 font-semibold hover:bg-blue-200 disabled:opacity-50 text-xs sm:text-sm"
             >
               {translatingField === 'drug' ? '⏳' : '🇫🇷'} FR
             </button>
             <button
               onClick={() => handleTranslation(result.drug, 'drug', 'sw')}
               disabled={translatingField === 'drug' || !result.drug}
-              className="px-3 py-1 rounded bg-green-100 text-green-800 font-semibold hover:bg-green-200 disabled:opacity-50"
+              className="px-3 py-1 rounded bg-green-100 text-green-800 font-semibold hover:bg-green-200 disabled:opacity-50 text-xs sm:text-sm"
             >
               {translatingField === 'drug' ? '⏳' : '🇹🇿'} SW
             </button>
           </div>
         </div>
         <div>
-          <p className="text-lg font-medium text-gray-800 mb-1">{result.drug || 'No drug identified'}</p>
+          <p className="text-base sm:text-lg font-medium text-gray-800 mb-1 break-words">{result.drug || 'No drug identified'}</p>
           {translatedData.drug_fr && (
-            <p className="italic text-blue-700 text-sm mt-1"><strong>French:</strong> {translatedData.drug_fr.translated_text}</p>
+            <p className="italic text-blue-700 text-xs sm:text-sm mt-1"><strong>French:</strong> {translatedData.drug_fr.translated_text}</p>
           )}
           {translatedData.drug_sw && (
-            <p className="italic text-green-700 text-sm mt-1"><strong>Swahili:</strong> {translatedData.drug_sw.translated_text}</p>
+            <p className="italic text-green-700 text-xs sm:text-sm mt-1"><strong>Swahili:</strong> {translatedData.drug_sw.translated_text}</p>
           )}
         </div>
       </div>

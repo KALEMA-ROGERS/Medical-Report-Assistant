@@ -30,30 +30,30 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-gray-50 flex flex-col">
       <Head>
         <title>Feyti Medical Report Assistant</title>
         <meta name="description" content="AI-powered regulatory report processing" />
       </Head>
 
-      <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 py-6">
-          <h1 className="text-3xl font-bold text-gray-900">
+      <header className="bg-white shadow-sm w-full">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex flex-col items-center text-center">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-gray-900 mb-2">
             Feyti Medical Report Assistant
           </h1>
-          <p className="text-gray-600">AI-powered adverse event report processing</p>
+          <p className="text-gray-600 text-base sm:text-lg">AI-powered adverse event report processing</p>
         </div>
       </header>
 
-      <nav className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex space-x-8">
+      <nav className="bg-white border-b w-full">
+        <div className="max-w-7xl mx-auto px-2 sm:px-4">
+          <div className="flex flex-wrap justify-center sm:justify-start space-x-2 sm:space-x-8">
             {['process', 'history', 'analytics'].map((tab) => (
               <button
                 key={tab}
-                className={`py-4 px-1 border-b-2 font-medium text-sm capitalize ${
+                className={`py-3 sm:py-4 px-2 sm:px-4 border-b-2 font-medium text-sm capitalize transition-colors duration-200 ${
                   activeTab === tab
-                    ? 'border-blue-500 text-blue-600'
+                    ? 'border-blue-500 text-blue-600 bg-blue-50'
                     : 'border-transparent text-gray-500 hover:text-gray-700'
                 }`}
                 onClick={() => setActiveTab(tab)}
@@ -66,24 +66,28 @@ export default function Home() {
         </div>
       </nav>
 
-      <main className="max-w-7xl mx-auto px-4 py-8">
+      <main className="flex-1 w-full max-w-7xl mx-auto px-2 sm:px-4 py-4 sm:py-8">
         {activeTab === 'process' && (
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
-            <div>
+          <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
+            <div className="order-2 lg:order-1">
               <ReportForm onReportProcessed={handleReportProcessed} />
             </div>
-            <div>
+            <div className="order-1 lg:order-2">
               {currentReport && <ReportResults report={currentReport} />}
             </div>
           </div>
         )}
 
         {activeTab === 'history' && (
-          <ReportHistory reports={reports} onRefresh={loadReports} />
+          <div className="w-full">
+            <ReportHistory reports={reports} onRefresh={loadReports} />
+          </div>
         )}
 
         {activeTab === 'analytics' && (
-          <Charts reports={reports} />
+          <div className="w-full">
+            <Charts reports={reports} />
+          </div>
         )}
       </main>
     </div>

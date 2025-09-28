@@ -5,9 +5,9 @@ const SeverityChart = ({ reports }) => {
 
   if (!reports || reports.length === 0) {
     return (
-      <div className="bg-white rounded-xl shadow p-8 text-center text-gray-500">
-        <div className="text-4xl mb-2">📊</div>
-        <h3 className="text-lg font-bold mb-1">No Data Available</h3>
+      <div className="bg-gradient-to-br from-blue-50 to-purple-100 rounded-2xl shadow-lg p-6 sm:p-10 text-center text-gray-500 border border-blue-100">
+        <div className="text-3xl sm:text-4xl mb-2">📊</div>
+        <h3 className="text-lg font-extrabold mb-1 text-blue-800">No Data Available</h3>
         <p>Process some adverse event reports to see analytics and charts.</p>
       </div>
     );
@@ -189,29 +189,29 @@ const SeverityChart = ({ reports }) => {
   };
 
   return (
-    <div className="bg-white rounded-xl shadow p-8">
+    <div className="bg-gradient-to-br from-blue-50 to-purple-100 rounded-2xl shadow-lg p-4 sm:p-8 max-w-full border border-blue-100">
       {/* Chart Navigation */}
-      <div className="flex gap-2 mb-8 justify-center">
+  <div className="flex flex-wrap gap-2 mb-6 sm:mb-8 justify-center">
         <button
-          className={`px-4 py-2 rounded-t-lg font-semibold text-sm transition border-b-4 ${activeChart === 'overview' ? 'border-blue-600 bg-white text-blue-700 shadow' : 'border-transparent bg-blue-100 text-blue-500 hover:bg-white'}`}
+          className={`px-3 sm:px-4 py-2 rounded-t-lg font-semibold text-xs sm:text-sm transition border-b-4 ${activeChart === 'overview' ? 'border-blue-600 bg-white text-blue-700 shadow' : 'border-transparent bg-blue-100 text-blue-500 hover:bg-white'}`}
           onClick={() => setActiveChart('overview')}
         >
           📊 Overview
         </button>
         <button
-          className={`px-4 py-2 rounded-t-lg font-semibold text-sm transition border-b-4 ${activeChart === 'severity' ? 'border-yellow-500 bg-white text-yellow-700 shadow' : 'border-transparent bg-yellow-50 text-yellow-600 hover:bg-white'}`}
+          className={`px-3 sm:px-4 py-2 rounded-t-lg font-semibold text-xs sm:text-sm transition border-b-4 ${activeChart === 'severity' ? 'border-yellow-500 bg-white text-yellow-700 shadow' : 'border-transparent bg-yellow-50 text-yellow-600 hover:bg-white'}`}
           onClick={() => setActiveChart('severity')}
         >
           ⚠️ Severity
         </button>
         <button
-          className={`px-4 py-2 rounded-t-lg font-semibold text-sm transition border-b-4 ${activeChart === 'outcomes' ? 'border-green-600 bg-white text-green-700 shadow' : 'border-transparent bg-green-50 text-green-600 hover:bg-white'}`}
+          className={`px-3 sm:px-4 py-2 rounded-t-lg font-semibold text-xs sm:text-sm transition border-b-4 ${activeChart === 'outcomes' ? 'border-green-600 bg-white text-green-700 shadow' : 'border-transparent bg-green-50 text-green-600 hover:bg-white'}`}
           onClick={() => setActiveChart('outcomes')}
         >
           🎯 Outcomes
         </button>
         <button
-          className={`px-4 py-2 rounded-t-lg font-semibold text-sm transition border-b-4 ${activeChart === 'drugs' ? 'border-purple-600 bg-white text-purple-700 shadow' : 'border-transparent bg-purple-50 text-purple-600 hover:bg-white'}`}
+          className={`px-3 sm:px-4 py-2 rounded-t-lg font-semibold text-xs sm:text-sm transition border-b-4 ${activeChart === 'drugs' ? 'border-purple-600 bg-white text-purple-700 shadow' : 'border-transparent bg-purple-50 text-purple-600 hover:bg-white'}`}
           onClick={() => setActiveChart('drugs')}
         >
           💊 Drugs
@@ -219,16 +219,15 @@ const SeverityChart = ({ reports }) => {
       </div>
 
       {/* Chart Content */}
-      <div className="chart-content">
+  <div className="chart-content">
         {activeChart === 'overview' && (
           <div className="overview-section">
-            <h2 className="text-2xl font-bold mb-4">📈 Analytics Overview</h2>
+            <h2 className="text-2xl font-extrabold mb-4 text-blue-800 tracking-tight drop-shadow">📈 Analytics Overview</h2>
             {renderStatsGrid()}
-            
             <div className="overview-insights">
-              <h3 className="text-lg font-semibold mb-2">🔍 Key Insights</h3>
+              <h3 className="text-lg font-bold mb-2 text-blue-700">🔍 Key Insights</h3>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="bg-white rounded-lg p-4 shadow">
+                <div className="bg-white/80 rounded-xl p-4 shadow border border-blue-100">
                   <h4 className="font-semibold">Most Common Severity</h4>
                   <p className="text-gray-700">
                     {Object.entries(severityData).sort(([,a], [,b]) => b - a)[0]?.[0] || 'N/A'}
@@ -237,7 +236,7 @@ const SeverityChart = ({ reports }) => {
                     }
                   </p>
                 </div>
-                <div className="bg-white rounded-lg p-4 shadow">
+                <div className="bg-white/80 rounded-xl p-4 shadow border border-purple-100">
                   <h4 className="font-semibold">Most Reported Drug</h4>
                   <p className="text-gray-700">
                     {Object.entries(drugData).sort(([,a], [,b]) => b - a)[0]?.[0] || 'N/A'}
@@ -246,7 +245,7 @@ const SeverityChart = ({ reports }) => {
                     }
                   </p>
                 </div>
-                <div className="bg-white rounded-lg p-4 shadow">
+                <div className="bg-white/80 rounded-xl p-4 shadow border border-green-100">
                   <h4 className="font-semibold">Recovery Rate</h4>
                   <p className="text-gray-700">
                     {totalReports > 0 
@@ -277,8 +276,8 @@ const SeverityChart = ({ reports }) => {
         {activeChart === 'drugs' && (
           <div className="charts-section">
             {renderBarChart(topDrugs, '💊 Top 10 Reported Drugs', 'bar-drugs')}
-            <div className="drug-stats mt-4">
-              <h3 className="text-lg font-semibold">Drug Analysis</h3>
+            <div className="drug-stats mt-3 sm:mt-4">
+              <h3 className="text-base sm:text-lg font-semibold">Drug Analysis</h3>
               <p className="text-gray-700">Total unique drugs reported: <strong>{Object.keys(drugData).length}</strong></p>
               <p className="text-gray-700">Most frequently reported: <strong>
                 {Object.entries(drugData).sort(([,a], [,b]) => b - a)[0]?.[0] || 'N/A'}
