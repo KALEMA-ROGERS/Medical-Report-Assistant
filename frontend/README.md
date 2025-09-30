@@ -1,3 +1,7 @@
+## Deployed Backend
+
+The backend API is live at: [https://medical-report-assistant-9.onrender.com]
+
 ## User Interface
 
 ### Analytics Overview
@@ -53,7 +57,16 @@ frontend/
 	```
 
 2. **Configure environment**
-	- If needed, create a `.env.local` file for custom API URLs (defaults to http://localhost:8000)
+	 - For local development, create a `.env.local` file with:
+		 ```
+		 REACT_APP_API_URL="http://localhost:8000"
+		 ```
+	 - **For deployment:**
+		 - In your deployment platform (e.g., Render), set the environment variable:
+			 - Key: `REACT_APP_API_URL`
+			 - Value: `https://medical-report-assistant-9.onrender.com` (your deployed backend URL)
+		 - Remove any `.env` or `.env.local` files that set the variable to localhost before deploying.
+		 - Redeploy the frontend after setting the variable.
 
 3. **Run the development server**
 	```bash
@@ -74,6 +87,7 @@ frontend/
 
 ## API Integration
 - The frontend communicates with the FastAPI backend (see backend/README.md)
+- **Important:** In production, all API requests must go to your deployed backend URL, not localhost. If you see requests to `http://localhost:8000`, your environment variable is not set correctly.
 - API endpoints are configured in `src/services/api.js`
 
 ## Customization
