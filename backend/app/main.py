@@ -24,7 +24,8 @@ app = FastAPI(title="Feyti Medical Report Assistant", version="1.0.0")
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        os.environ.get("FRONTEND_URL", "http://localhost:3000")
+        "http://localhost:3000",
+        "https://medical-report-assistant-10.onrender.com"
     ],
     allow_credentials=True,
     allow_methods=["*"],
