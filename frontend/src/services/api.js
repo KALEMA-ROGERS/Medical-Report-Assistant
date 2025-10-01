@@ -1,7 +1,10 @@
 import axios from 'axios';
 
-// Use environment variable for API base URL, fallback to localhost
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+// Use NEXT_PUBLIC_API_URL for deployment, fallback to localhost for local dev
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+
+// Log the API base URL to verify what is being used in the deployed build
+console.log('API_BASE_URL:', API_BASE_URL);
 
 const api = axios.create({
   baseURL: API_BASE_URL,
